@@ -11,7 +11,7 @@
    <children>
       <HBox prefHeight="60.0" prefWidth="680.0" style="-fx-border-color: white;">
          <children>
-            <Button fx:id="SAVE" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #818384;" text="SAVE" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="SAVE" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #818384;" text="SAVE" textAlignment="CENTER" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
@@ -19,7 +19,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="HELP" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #818384;" text="?" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="HELP" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #818384;" text="?" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -32,7 +32,7 @@
                   <Font size="34.0" />
                </font>
             </Label>
-            <Button fx:id="RESET" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #818384;" text="↻" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="RESET" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #818384;" text="↻" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -40,7 +40,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="LOAD" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #818384;" text="LOAD" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="LOAD" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #818384;" text="LOAD" textAlignment="CENTER" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
@@ -343,7 +343,7 @@
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="65.0" prefWidth="50.0">
                <children>
-                  <Button fx:id="Q" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="Q" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="Q" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="Q" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -354,7 +354,7 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="W" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="W" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="W" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="W" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -365,7 +365,7 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="E" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="E" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="E" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="E" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -376,7 +376,7 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="R" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="R" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="R" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="R" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -387,7 +387,7 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="T" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="T" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="T" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="T" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -398,7 +398,7 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="Y" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="Y" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="Y" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="Y" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -409,7 +409,7 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="U" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="U" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="U" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="U" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -420,7 +420,7 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="I" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="I" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="I" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="I" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -431,7 +431,7 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="O" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="O" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="O" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="O" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -442,113 +442,7 @@
                         <Insets right="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="P" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="P" textAlignment="CENTER" textFill="WHITE">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="TOP_CENTER" prefHeight="65.0" prefWidth="50.0">
-               <children>
-                  <Button fx:id="A" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="A" textAlignment="CENTER" textFill="WHITE">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="S" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="S" textAlignment="CENTER" textFill="WHITE">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="D" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="D" textAlignment="CENTER" textFill="WHITE">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="F" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="F" textAlignment="CENTER" textFill="WHITE">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="G" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="G" textAlignment="CENTER" textFill="WHITE">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="H" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="H" textAlignment="CENTER" textFill="WHITE">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="J" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="J" textAlignment="CENTER" textFill="WHITE">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="K" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="K" textAlignment="CENTER" textFill="WHITE">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="L" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="L" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="P" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="P" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -566,7 +460,113 @@
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="65.0" prefWidth="50.0">
                <children>
-                  <Button fx:id="ENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="70.0" style="-fx-background-color: #818384;" text="ENTER" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="A" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="A" textAlignment="CENTER" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="S" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="S" textAlignment="CENTER" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="D" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="D" textAlignment="CENTER" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="F" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="F" textAlignment="CENTER" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="G" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="G" textAlignment="CENTER" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="H" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="H" textAlignment="CENTER" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="J" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="J" textAlignment="CENTER" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="K" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="K" textAlignment="CENTER" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="L" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="L" textAlignment="CENTER" textFill="WHITE">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="65.0" prefWidth="50.0">
+               <children>
+                  <Button fx:id="ENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="70.0" style="-fx-background-color: #818384;" text="ENTER" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -577,7 +577,7 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="Z" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="Z" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="Z" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="Z" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -588,7 +588,7 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="X" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="X" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="X" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="X" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -599,7 +599,7 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="C" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="C" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="C" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="C" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -610,7 +610,7 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="V" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="V" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="V" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="V" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -621,7 +621,7 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="B" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="B" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="B" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="B" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -632,7 +632,7 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="N" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="N" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="N" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="N" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -643,7 +643,7 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="M" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="M" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="M" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="40.0" style="-fx-background-color: #818384;" text="M" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>
@@ -654,7 +654,7 @@
                         <Font size="22.0" />
                      </font>
                   </Button>
-                  <Button fx:id="DELETE" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="60.0" prefWidth="70.0" style="-fx-background-color: #818384;" text="⌫" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="DELETE" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="60.0" prefWidth="70.0" style="-fx-background-color: #818384;" text="⌫" textAlignment="CENTER" textFill="WHITE">
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" />
                      </padding>

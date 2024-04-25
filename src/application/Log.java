@@ -8,14 +8,13 @@ import java.util.List;
 public class Log 
 {
 	// Tracks and logs game actions, can read in file to read progress and updates the file with every move.
-	private File logFile;
 	private GameSession currentSession;
 	private List<GameSession> totalGames;
 	
 	public Log() 
 	{
 		// Default Constructor
-		this.logFile = new File("currentSave.txt");
+		File logFile = new File("currentSave.txt");
 		if (!logFile.exists())
 		{
 			try
@@ -29,12 +28,13 @@ public class Log
 		}
 		this.currentSession = new GameSession();
 		this.totalGames = new ArrayList<>();
+		totalGames.add(currentSession);
 	}
 	
 	public Log(String filename)
 	{		
 		// Constructor
-		this.logFile = new File(filename);
+		File logFile = new File(filename);
 		if (!logFile.exists())
 		{
 			try
@@ -46,7 +46,7 @@ public class Log
 				e.printStackTrace();
 			}
 		}
-		this.totalGames = loadGames();
+		this.totalGames = loadGames(logFile);
 		if (!getLastSession().isFinished())
 		{
 			currentSession = getLastSession();
@@ -57,11 +57,6 @@ public class Log
 		}
 	}
 	
-	
-	public File getLogFile()
-	{
-		return logFile;
-	}
 	
 	public GameSession getCurrentSession()
 	{
@@ -78,16 +73,30 @@ public class Log
 		return totalGames.get(totalGames.size() - 1);
 	}
 	
-	public void updateSession(GameSession session, int gameNumber, boolean won, String targertWord, List<String> previousGuesses)
+	public GameSession newSession()
 	{
-		// Use for update currentSession
-		session.setGameNumber(gameNumber);
-		session.setWon(won);
-		session.setTargetWord(targertWord);
-		session.setPreviousGuesses(previousGuesses);
+		GameSession newSession = new GameSession(totalGames.size() + 1);
+		totalGames.add(currentSession);
+		return newSession;
 	}
 	
-	public void saveGame(GameSession session) 
+	public void updateCurrentSession(int gameNum, String guessWord, String targertWord)
+	{
+		// Use for update currentSession
+		currentSession.setGameNumber(gameNum);
+		currentSession.setTargetWord(targertWord);
+		currentSession.getPreviousGuesses().add(guessWord);
+	}
+	
+	public void logCompletedSession(int gameNum, boolean won, String guessWord, String targertWord)
+	{
+		// Use for update currentSession
+		updateCurrentSession(gameNum, guessWord, targertWord);
+		currentSession.setWon(won);
+		currentSession = newSession();
+	}
+	
+	public void saveGame(GameSession session, File logFile) 
 	{
 		// Save games
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true))) 
@@ -104,7 +113,7 @@ public class Log
     }
 
 
-	public List<GameSession> loadGames() 
+	public List<GameSession> loadGames(File logFile)
 	{
 		// Create a List of GameSessions, read in files and create separate game sessions for each game
         List<GameSession> sessions = new ArrayList<>();
@@ -125,4 +134,6 @@ public class Log
         }
         return sessions;
     }
+	
+	
 }

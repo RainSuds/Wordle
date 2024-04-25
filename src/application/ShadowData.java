@@ -30,19 +30,28 @@ public class ShadowData
 		this.currentGame = cg;
 	}
 
-	public int getCurrentRow() {
+	public int getCurrentRow() 
+	{
 		return currentRow;
 	}
 	
-	public Label[][] getCurrentGame() {
+	public Label[][] getCurrentGame() 
+	{
 		return currentGame;
 	}
 
-	public void setCurrentRow(int currentRow) {
+	public void setCurrentRow(int currentRow) 
+	{
 		this.currentRow = currentRow;
 	}
-	public void setCurrentGame(Label[][] cg) {
+	public void setCurrentGame(Label[][] cg) 
+	{
 		this.currentGame = cg;
+	}
+
+	public void incrementCurrentRow() 
+	{
+		currentRow++;
 	}
 	
 }

@@ -1,5 +1,8 @@
 package application;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -21,60 +24,127 @@ public class GameBoard
         this.setLog(new Log());
         this.selectWord = new SelectWord();
         this.shadowData = new ShadowData();
-        this.stats = new Stats();
+        this.setStats(new Stats());
 	}
 
 	public GameBoard(Log l, SelectWord sw, ShadowData sd, Stats s)
 	{
 		// Initialize components
         this.setLog(l);
-        this.selectWord = sw;
-        this.shadowData = sd;
-        this.stats = s;
+        this.setSelectWord(sw);
+        this.setShadowData(sd);
+        this.setStats(s);
 	}
 	
 	public Log getLog() 
 	{
 		return log;
 	}
-
-	public void setLog(Log log) 
+	
+	public SelectWord getSelectWord() 
 	{
-		this.log = log;
+		return selectWord;
 	}
 	
-	public void checkGuesses(TextField guessingWord)
+	public ShadowData getShadowData() 
+	{
+		return shadowData;
+	}
+	
+	public Stats getStats() {
+		return stats;
+	}
+
+	public void setLog(Log l) 
+	{
+		this.log = l;
+	}
+	
+	public void setSelectWord(SelectWord s) 
+	{
+		this.selectWord = s;
+	}
+	
+	public void setShadowData(ShadowData sd) 
+	{
+		this.shadowData = sd;
+	}
+	
+	public void setStats(Stats stats) {
+		this.stats = stats;
+	}
+
+	public boolean isValidInput(String word)
+	{
+		return selectWord.wordInWordList(word) || word.length() == selectWord.getWORD_LENGTH();
+	}
+	
+	public boolean checkGuesses(TextField guessingWord)
 	{
 		// Check the input
+		String guess = guessingWord.getText().toUpperCase();
+		
 		Label[][] currentGame = shadowData.getCurrentGame();
 		Label[] currentRow = currentGame[shadowData.getCurrentRow()];
 		String correctWord = selectWord.getTargetWord();
-		String guess = guessingWord.getText().toUpperCase();
 		
-		for (int i = 0; i < correctWord.length(); i++)
+		Map<Character, Integer> letterFrequency = new HashMap<>();
+		for (char c : correctWord.toCharArray()) {
+	        letterFrequency.put(c, letterFrequency.getOrDefault(c, 0) + 1);
+	    }
+		
+		// First pass: check for correct positions
+	    for (int i = 0; i < correctWord.length(); i++) {
+	        char letter = guess.charAt(i);
+	        Label label = currentRow[i];
+	        label.setText(String.valueOf(letter).toUpperCase()); // Set text as uppercase
+	        if (letter == correctWord.charAt(i)) {
+	            label.setStyle("-fx-background-color: #538D4E;"); // Green for correct position
+	            letterFrequency.put(letter, letterFrequency.get(letter) - 1); // Decrease count
+	        }
+	    }
+
+	    // Second pass: check for correct letters in wrong positions
+	    for (int i = 0; i < correctWord.length(); i++) {
+	        char letter = guess.charAt(i);
+	        Label label = currentRow[i];
+	        if (letter != correctWord.charAt(i)) {
+	            if (letterFrequency.getOrDefault(letter, 0) > 0) {
+	                label.setStyle("-fx-background-color: #B59F3B;"); // Yellow for correct letter, wrong place
+	                letterFrequency.put(letter, letterFrequency.get(letter) - 1); // Decrease count
+	            } else {
+	                label.setStyle("-fx-background-color: #3A3A3C;"); // Gray for incorrect letter
+	            }
+	        }
+	    }
+		
+	    shadowData.incrementCurrentRow();
+	    
+		if (guess.equals(correctWord))
 		{
-			String letter = guess.substring(i, i + 1);
-			if (letter.equals(correctWord.substring(i, i + 1)))
-			{
-				currentRow[i].setText(letter);
-				currentRow[i].setStyle("-fx-background-color: #538D4E;");
-			}
-			else if (correctWord.indexOf(letter) > -1)
-			{
-				currentRow[i].setText(letter);
-				currentRow[i].setStyle("-fx-background-color: #B59F3B;");
-			}
-			else
-			{
-				currentRow[i].setText(letter);
-				currentRow[i].setStyle("-fx-background-color: #3A3A3C;");
-			}
+			return true;
 		}
+		
+		log.updateCurrentSession(log.getTotalGames().size(), guess, correctWord);
+
+		
+		return false;
 	}
 	
-	public void beginGame()
+	public void saveGame() 
 	{
-		// Start/continue a game instance
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void resetGameBoard() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void loadFile(String fileName) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

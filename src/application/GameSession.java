@@ -16,7 +16,6 @@ public class GameSession
         this.won = false;
         this.targetWord = "";
         this.previousGuesses = new ArrayList<String>();
-
     }
     
     public GameSession(int gameNumber) 
