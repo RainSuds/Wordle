@@ -6,8 +6,8 @@ public class ShadowData
 {
 	// Keep track of current game
 	private int currentRow;
-	private char[] usedChar;
-	private Label[][] currentGame;
+	private char[] usedChar; // new, need method
+	private Label[][] currentGameTable;
 	
 	public ShadowData()
 	{
@@ -15,12 +15,12 @@ public class ShadowData
 		setCurrentRow(0);
         int rows = 6;
         int columns = 5;
-        currentGame = new Label[rows][columns];
+        currentGameTable = new Label[rows][columns];
 
         // Initialize each Label in the array
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                currentGame[i][j] = new Label();
+                currentGameTable[i][j] = new Label();
             }
         }
 	}
@@ -28,7 +28,7 @@ public class ShadowData
 	public ShadowData(int cr, Label[][] cg)
 	{
 		this.setCurrentRow(cr);
-		this.currentGame = cg;
+		this.currentGameTable = cg;
 	}
 
 	public int getCurrentRow() 
@@ -42,7 +42,7 @@ public class ShadowData
 	
 	public Label[][] getCurrentGame() 
 	{
-		return currentGame;
+		return currentGameTable;
 	}
 	
 	public void setCurrentRow(int currentRow) 
@@ -56,7 +56,7 @@ public class ShadowData
 
 	public void setCurrentGame(Label[][] cg) 
 	{
-		this.currentGame = cg;
+		this.currentGameTable = cg;
 	}
 
 	public void incrementCurrentRow() 
