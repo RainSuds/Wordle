@@ -1,22 +1,48 @@
 package application;
 
-import java.util.List;
 import javafx.scene.control.Label;
 
 public class ShadowData 
 {
 	// Keep track of current game
+	private int currentRow;
 	private Label[][] currentGame;
 	
 	public ShadowData()
 	{
-		Label[] row0 = {box00, box01, box02, box03, box04};
-		Label[] row1 = {box10, box11, box12, box13, box14};
-		Label[] row2 = {box00, box01, box02, box03, box24};
-		Label[] row3 = {box00, box01, box02, box03, box34};
-		Label[] row4 = {box00, box01, box02, box03, box44};
-		Label[] row5 = {box00, box01, box02, box03, box54};
-		currentGame = {Label[] row1 = {box00, box01, box02, box03, box04};}
+		// Define dimensions
+		setCurrentRow(0);
+        int rows = 6;
+        int columns = 5;
+        currentGame = new Label[rows][columns];
+
+        // Initialize each Label in the array
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                currentGame[i][j] = new Label();
+            }
+        }
+	}
+	
+	public ShadowData(int cr, Label[][] cg)
+	{
+		this.setCurrentRow(cr);
+		this.currentGame = cg;
+	}
+
+	public int getCurrentRow() {
+		return currentRow;
+	}
+	
+	public Label[][] getCurrentGame() {
+		return currentGame;
+	}
+
+	public void setCurrentRow(int currentRow) {
+		this.currentRow = currentRow;
+	}
+	public void setCurrentGame(Label[][] cg) {
+		this.currentGame = cg;
 	}
 	
 }

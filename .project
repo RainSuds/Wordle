@@ -20,4 +20,10 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>resources</name>
+			<value>file:/C:/Users/13198/OneDrive/Documents/TAMU/CSCE314/Java/Wordle/src/resources</value>
+		</variable>
+	</variableList>
 </projectDescription>

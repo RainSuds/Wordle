@@ -8,16 +8,14 @@ import java.util.Random;
 public class SelectWord 
 {
 	// Handles the selection of a random word for the game by reading in a txt file.
-	private File wordFile;
 	private String targetWord;
 	private List<String> wordList;
 	
 	public SelectWord()
 	{
 		// Constructor
-		this.wordFile = new File("wordList.txt");
-		setWordList(updateWordList(wordFile));
-		setTargetWord(selectRandomWord());
+		this.wordList = loadWordsFromResource("wordList.txt");
+        this.targetWord = selectRandomWord(); // Selects a random word after list is populated.
 	}
 
 	public String getTargetWord() 
@@ -35,11 +33,17 @@ public class SelectWord
 		this.wordList = ls;
 	}
 	
-	public List<String> updateWordList(File f)
+	public List<String> loadWordsFromResource(String resourcePath)
 	{
 		// load file
 		List<String> wordList = new ArrayList<>();
-		try (BufferedReader reader = new BufferedReader(new FileReader(wordFile))) 
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath);
+        if (inputStream == null) 
+        {
+            throw new RuntimeException("Resource file not found: " + resourcePath);
+        }
+        
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) 
         {
             String line;
             while ((line = reader.readLine()) != null) 
@@ -49,7 +53,8 @@ public class SelectWord
         } 
         catch (IOException e) 
         {
-            System.err.println("Error reading from log file: " + e.getMessage());
+        	e.printStackTrace();
+            throw new RuntimeException("Failed to read the word list", e);
         }
 		return wordList;
 	}
