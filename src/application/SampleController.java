@@ -20,8 +20,8 @@ public class SampleController
 	
 	@FXML protected void checkGuess()
 	{
-		Label[] row = {box00, box01, box02, box03, box04};
-		newGame.checkGuesses(row, guessInput);
+		
+		newGame.checkGuesses(row1, guessInput);
 	}
 	
 	
