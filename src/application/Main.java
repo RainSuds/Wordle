@@ -1,7 +1,9 @@
+package application;
+
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.fxml.FXMLLoader;
 
 public class Main extends Application {
 
@@ -12,30 +14,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        try {
-            // Set the title of the window (Stage)
-            primaryStage.setTitle("Wordle Game");
-
-            // Create the main layout pane
-            BorderPane root = new BorderPane();
-
-            // Initialize the game board or main game scene
-            GameBoard gameBoard = new GameBoard();
-            root.setCenter(gameBoard.buildGameBoard());
-
-            // Set the scene with root pane and size
-            Scene scene = new Scene(root, 800, 600);
-
-            // Apply a CSS stylesheet if needed
-            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-
-            // Set the primary scene
-            primaryStage.setScene(scene);
-
-            // Show the application window
-            primaryStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    	try {
+			FXMLLoader root = new FXMLLoader(Main.class.getResource("Sample.fxml"));
+			Scene scene = new Scene(root.load(), 700, 700);
+			primaryStage.setTitle("Wordle");
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
     }
 }

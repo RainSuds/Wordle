@@ -35,6 +35,26 @@ public class GameSession
         this.previousGuesses = previousGuesses;
     }
     
+    public int getGameNumber()
+    {
+    	return gameNumber;
+    }
+    
+    public boolean getWon()
+    {
+    	return won;
+    }
+    
+    public String getTargetWord()
+    {
+    	return targetWord;
+    }
+    
+    public List<String> getPreviousGuesses()
+    {
+    	return previousGuesses;
+    }
+    
     public void setGameNumber(int n)
     {
     	this.gameNumber = n;
@@ -72,7 +92,6 @@ public class GameSession
     	}
 		return false;
     }
-    
 
 
     @Override

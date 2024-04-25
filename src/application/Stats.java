@@ -20,6 +20,9 @@ public class Stats
 		setCurrentStreak(0);
 		setMaxStreak(0);
 		setGuessesDistribution(new HashMap<>());
+		for (int i = 1; i <= 6; i++) {
+			guessesDistribution.put(i, 0);
+        }
 	}
 	
 	public Stats(int n, float r, int cs, int ms, Map<Integer, Integer> hm)
@@ -81,5 +84,45 @@ public class Stats
 		this.guessesDistribution = guessesDistribution;
 	}
 	
-	
+	public void updateCurrentStats(Log l)
+	{
+		// update the private members with log
+		totalGame = l.getTotalGames().size();
+		
+		if (totalGame == 0)
+		{
+			return;
+		}
+		
+		int sumWin = 0;
+		int curWin = 0;
+		int maxWin = 0;
+		
+		for (int i = 0; i < totalGame; i++)
+		{
+			GameSession currSession = l.getTotalGames().get(i);
+			if (currSession.getWon())
+			{
+				sumWin++;
+				curWin++;
+				if (curWin > maxWin)
+				{
+					// Update max win streak
+					maxWin = curWin;
+				}
+				
+				int guessCount = currSession.getPreviousGuesses().size();
+				guessesDistribution.put(guessCount, guessesDistribution.getOrDefault(guessCount, 0) + 1);
+			}
+			else
+			{
+				// Not win
+				curWin = 0;
+				
+			}
+		}
+		winRate = (float) sumWin / (float) totalGame;
+		currentStreak = curWin;
+		maxStreak = maxWin;
+	}
 }

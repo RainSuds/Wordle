@@ -58,14 +58,24 @@ public class Log
 	}
 	
 	
+	public File getLogFile()
+	{
+		return logFile;
+	}
+	
+	public GameSession getCurrentSession()
+	{
+		return currentSession;
+	}
+	
+	public List<GameSession> getTotalGames()
+	{
+		return totalGames;
+	}
+	
 	public GameSession getLastSession()
 	{
 		return totalGames.get(totalGames.size() - 1);
-	}
-	
-	public GameSession getCurrentGame()
-	{
-		return currentSession;
 	}
 	
 	public void updateSession(GameSession session, int gameNumber, boolean won, String targertWord, List<String> previousGuesses)

@@ -16,8 +16,8 @@ public class SelectWord
 	{
 		// Constructor
 		this.wordFile = new File("wordList.txt");
-		this.wordList = setWordList(wordFile);
-		this.targetWord = selectRandomWord();
+		setWordList(updateWordList(wordFile));
+		setTargetWord(selectRandomWord());
 	}
 
 	public String getTargetWord() 
@@ -30,7 +30,12 @@ public class SelectWord
 		this.targetWord = targetWord;
 	}
 	
-	public List<String> setWordList(File f)
+	public void setWordList(List<String> ls)
+	{
+		this.wordList = ls;
+	}
+	
+	public List<String> updateWordList(File f)
 	{
 		// load file
 		List<String> wordList = new ArrayList<>();
