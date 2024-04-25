@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
-public class SampleController 
+public class GameController 
 {
 	
 	
@@ -41,6 +41,7 @@ public class SampleController
 		guessInput = new TextField();        
 		ShadowData sd = new ShadowData(0, table);
 		this.newGame = new GameBoard(new Log(), new SelectWord(), sd, new Stats());
+		System.out.println(newGame.getSelectWord().getTargetWord());
 	}
 	
 	private void showAlertDialog(String message) {
