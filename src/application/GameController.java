@@ -38,7 +38,6 @@ public class GameController
 		initializingTable();
 		guessInput = new TextField();
 		createGameController(table, new GameBoard(new Log(), new ShadowData(table), new Stats()));
-		
 	}
 	
 	public void initializingTable()
@@ -282,7 +281,7 @@ public class GameController
 
 	        // You could pass data to your StatScreen controller if needed
 	        StatsController statController = loader.getController();
-	        statController.setStats(newGame.getStats());
+	        statController.initStats(newGame);
 
 	        // Set up the stage
 	        Stage statStage = new Stage();

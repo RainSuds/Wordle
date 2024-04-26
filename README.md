@@ -40,3 +40,10 @@ Track total play time, possibly using a timer.
 Calculate and display the win rate.
 Keep track of current streak and maximum streak.
 Provide a distribution of guesses (e.g., how many games were won in 3 guesses, 4 guesses, etc.).
+
+Current Tasks
+- StatsScreen
+- Save
+- Load
+- How to play
+- Disable

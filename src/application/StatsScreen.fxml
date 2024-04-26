@@ -1,38 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.chart.StackedBarChart?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane stylesheets="@application.css" prefHeight="300.0" prefWidth="200.0" style="-fx-background-color: #121213;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StatsController">
+<AnchorPane prefHeight="300.0" prefWidth="200.0" style="-fx-background-color: #121213;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StatsController">
    <children>
-      <VBox alignment="TOP_RIGHT" prefHeight="32.0" prefWidth="247.0">
+      <VBox alignment="TOP_RIGHT" prefHeight="32.0" prefWidth="247.0" />
+      <VBox alignment="CENTER" prefHeight="309.0" prefWidth="256.0">
          <children>
-            <Button fx:id="CLOSE" mnemonicParsing="false" onAction="#closeScreen" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #121213;" text="X" textAlignment="CENTER" textFill="WHITE" />
-         </children>
-      </VBox>
-      <VBox alignment="CENTER" layoutY="28.0" prefHeight="273.0" prefWidth="247.0">
-         <children>
-            <ImageView id="icon" fitHeight="64.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="64.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="https://static01.nyt.com/images/2022/03/02/crosswords/alpha-wordle-icon-new/alpha-wordle-icon-new-square320-v3.png?format=pjpg&amp;quality=75&amp;auto=webp&amp;disable=upscale" />
+                  <Image url="@../resources/Wordle_Logo.png" />
                </image>
             </ImageView>
             <Label text="Wordle" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="22.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="19.0" prefWidth="256.0">
                <children>
                   <Label text="STATISTIC" textAlignment="CENTER" textFill="WHITE">
                      <padding>
@@ -47,50 +40,50 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="TOP_CENTER" prefHeight="19.0" prefWidth="200.0">
+            <HBox alignment="TOP_CENTER" prefHeight="39.0" prefWidth="247.0">
                <children>
-                  <Label text="0" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="gamesPlayed" text="0" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
+                        <Insets left="10.0" />
                      </HBox.margin>
                      <padding>
-                        <Insets left="15.0" right="15.0" />
+                        <Insets right="25.0" />
                      </padding>
                   </Label>
-                  <Label text="0" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="winRate" text="0" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
+                        <Insets />
                      </HBox.margin>
                      <padding>
-                        <Insets left="15.0" right="15.0" />
+                        <Insets left="25.0" right="25.0" />
                      </padding>
                   </Label>
-                  <Label text="0" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="currentStreak" text="0" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
+                        <Insets />
                      </HBox.margin>
                      <padding>
-                        <Insets left="15.0" right="15.0" />
+                        <Insets left="25.0" right="25.0" />
                      </padding>
                   </Label>
-                  <Label text="0" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="maxStreak" text="0" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="30.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
+                        <Insets right="10.0" />
                      </HBox.margin>
                      <padding>
-                        <Insets left="15.0" right="15.0" />
+                        <Insets left="25.0" />
                      </padding>
                   </Label>
                </children>
@@ -99,51 +92,156 @@
                <children>
                   <Label text="Played" textAlignment="CENTER" textFill="WHITE">
                      <HBox.margin>
-                        <Insets left="2.0" right="2.0" />
+                        <Insets left="10.0" />
                      </HBox.margin>
                      <padding>
-                        <Insets left="3.0" right="3.0" />
+                        <Insets right="10.0" />
                      </padding>
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                   </Label>
                   <Label text="Win %" textAlignment="CENTER" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="2.0" right="2.0" />
                      </HBox.margin>
                      <padding>
-                        <Insets left="3.0" right="3.0" />
+                        <Insets left="10.0" right="10.0" />
                      </padding>
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                   </Label>
                   <Label text="Current Streak" textAlignment="CENTER" textFill="WHITE">
                      <HBox.margin>
-                        <Insets left="2.0" right="2.0" />
+                        <Insets />
                      </HBox.margin>
                      <padding>
-                        <Insets left="3.0" right="3.0" />
+                        <Insets left="10.0" right="10.0" />
                      </padding>
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                   </Label>
                   <Label text="Max Streak" textAlignment="CENTER" textFill="WHITE">
                      <HBox.margin>
-                        <Insets left="2.0" right="2.0" />
+                        <Insets right="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="10.0" />
+                     </font>
                      <padding>
-                        <Insets left="3.0" right="3.0" />
+                        <Insets left="5.0" />
                      </padding>
                   </Label>
                </children>
             </HBox>
             <VBox prefHeight="0.0" prefWidth="221.0">
                <children>
-                  <StackedBarChart alternativeRowFillVisible="false" disable="true" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" legendVisible="false" title="GUESS DISTRIBUTION" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
-                    <xAxis>
-                      <CategoryAxis autoRanging="false" side="LEFT" visible="false" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis id="distribution" lowerBound="6.0" minorTickVisible="false" tickLabelFill="WHITE" tickLength="2.0" upperBound="0.0" />
-                    </yAxis>
-                  </StackedBarChart>
+                  <Label text="GUESS DISTRIBUTION" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="1">
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </Label>
+                        <Rectangle fx:id="progress1" arcHeight="5.0" arcWidth="5.0" fill="#3a3a3c" height="15.0" stroke="BLACK" strokeType="INSIDE" width="13.0">
+                           <HBox.margin>
+                              <Insets left="2.0" />
+                           </HBox.margin>
+                        </Rectangle>
+                        <Label fx:id="numWin1" text="0" translateX="-10.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="2">
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </Label>
+                        <Rectangle fx:id="progress2" arcHeight="5.0" arcWidth="5.0" fill="#3a3a3c" height="15.0" stroke="BLACK" strokeType="INSIDE" width="13.0">
+                           <HBox.margin>
+                              <Insets left="2.0" />
+                           </HBox.margin>
+                        </Rectangle>
+                        <Label fx:id="numWin2" text="0" translateX="-10.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="3">
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </Label>
+                        <Rectangle fx:id="progress3" arcHeight="5.0" arcWidth="5.0" fill="#3a3a3c" height="15.0" stroke="BLACK" strokeType="INSIDE" width="13.0">
+                           <HBox.margin>
+                              <Insets left="2.0" />
+                           </HBox.margin>
+                        </Rectangle>
+                        <Label fx:id="numWin3" text="0" translateX="-10.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="4">
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </Label>
+                        <Rectangle fx:id="progress4" arcHeight="5.0" arcWidth="5.0" fill="#3a3a3c" height="15.0" stroke="BLACK" strokeType="INSIDE" width="13.0">
+                           <HBox.margin>
+                              <Insets left="2.0" />
+                           </HBox.margin>
+                        </Rectangle>
+                        <Label fx:id="numWin4" text="0" translateX="-10.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="5">
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </Label>
+                        <Rectangle fx:id="progress5" arcHeight="5.0" arcWidth="5.0" fill="#3a3a3c" height="15.0" stroke="BLACK" strokeType="INSIDE" width="13.0">
+                           <HBox.margin>
+                              <Insets left="2.0" />
+                           </HBox.margin>
+                        </Rectangle>
+                        <Label fx:id="numWin5" text="0" translateX="-10.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="6">
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </Label>
+                        <Rectangle fx:id="progress6" arcHeight="5.0" arcWidth="5.0" fill="#3a3a3c" height="15.0" stroke="BLACK" strokeType="INSIDE" width="13.0">
+                           <HBox.margin>
+                              <Insets left="2.0" />
+                           </HBox.margin>
+                        </Rectangle>
+                        <Label fx:id="numWin6" text="0" translateX="-10.0" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
       </VBox>
    </children>
 </AnchorPane>

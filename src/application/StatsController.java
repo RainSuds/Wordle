@@ -3,86 +3,71 @@ package application;
 import java.util.Map;
 
 import javafx.fxml.FXML;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class StatsController {
+public class StatsController 
+{
 
-    @FXML private Label totalGamesLabel;
-    @FXML private Label winRateLabel;
-    @FXML private Label currentStreakLabel;
-    @FXML private Label maxStreakLabel;
-    @FXML private BarChart<String, Number> distribution;
-    @FXML private CategoryAxis xAxis;
-    @FXML private NumberAxis yAxis;
-    @FXML private Button CLOSE;
-
-    private Stats Stats;
-
-    @FXML
+	@FXML private Label gamesPlayed, winRate, currentStreak, maxStreak;
+    @FXML private Label numWin1, numWin2, numWin3, numWin4, numWin5, numWin6;
+    @FXML private Rectangle progress1, progress2, progress3, progress4, progress5, progress6;
+    private GameBoard game;
+    private Stats stats;
+    
     public void initialize() 
+	{	
+    	game = new GameBoard();
+    	initStats(game);
+	}
+    
+    public void initStats(GameBoard gb) 
     {
-        initializeChart();
-    }
-
-    public void setStats(Stats data) 
+    	setStats(gb.getStats());
+    	stats.updateCurrentStats(gb.getLog());
+    	updateScreenUI();
+	}
+    
+    public void setStats(Stats stats) 
     {
-        this.Stats = data;
-        updateUI();
+        this.stats = stats;
     }
-
-    private void updateUI() 
-    {
-        if (Stats != null) 
-        {
-            totalGamesLabel.setText(String.valueOf(Stats.getTotalGame()));
-            winRateLabel.setText(String.format("%.2f%%", Stats.getWinRate() * 100));
-            currentStreakLabel.setText(String.valueOf(Stats.getCurrentStreak()));
-            maxStreakLabel.setText(String.valueOf(Stats.getMaxStreak()));
-            
-            updateGuessDistribution();
-        }
-    }
-
-    private void initializeChart() 
-    {
-        distribution.setLegendVisible(false);
-        xAxis.setLabel("Guess Count");
-        yAxis.setLabel("Games");
-
-        // Prepare the chart with default data
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        series.getData().add(new XYChart.Data<>("1", 0));
-        series.getData().add(new XYChart.Data<>("2", 0));
-        series.getData().add(new XYChart.Data<>("3", 0));
-        distribution.getData().add(series);
-    }
-
-    private void updateGuessDistribution() 
-    {
-        if (!distribution.getData().isEmpty()) 
-        {
-            XYChart.Series<String, Number> series = distribution.getData().get(0);
-            series.getData().clear();
-            Map<Integer, Integer> distribution = Stats.getGuessesDistribution();
-            for (Map.Entry<Integer, Integer> entry : distribution.entrySet()) 
-            {
-                series.getData().add(new XYChart.Data<>(String.valueOf(entry.getKey()), entry.getValue()));
-            }
-        }
-    }
-
+    
     @FXML
     private void closeScreen() 
     {
-        Stage stage = (Stage) CLOSE.getScene().getWindow();
+        Stage stage = (Stage) numWin1.getScene().getWindow();
         stage.close();
     }
+    
+    private void updateScreenUI()
+    {
+    	// change all the labels: gamesPlayed, winRate, currentStreak, maxStreak.
+    	// update all the win distribution bar length and number
+        
+    	gamesPlayed.setText(String.valueOf(stats.getGamesPlayed()));
+    	winRate.setText(String.format("%.2f%%", stats.getWinRate()));
+    	currentStreak.setText(String.valueOf(stats.getCurrentStreak()));
+    	maxStreak.setText(String.valueOf(stats.getMaxStreak()));
 
-	
+        // Update labels and progress bars
+        Label[] winLabels = { numWin1, numWin2, numWin3, numWin4, numWin5, numWin6 };
+        Rectangle[] progressBars = { progress1, progress2, progress3, progress4, progress5, progress6 };
+        Map<Integer, Integer> distribution = stats.getGuessesDistribution();
+
+        int maxGuesses = distribution.values().stream().max(Integer::compare).orElse(1);
+
+        for (int i = 1; i <= winLabels.length; i++) {
+            int wins = distribution.getOrDefault(i, 0);
+            System.out.println("i: " + i + ", wins: " + wins);
+            winLabels[i - 1].setText(String.valueOf(wins));
+            if (wins > 0) {
+                double progressWidth = (200.0 * wins) / maxGuesses; // Assumes max width of 200 for the bar
+                progressBars[i - 1].setWidth(progressWidth);
+            }
+        }
+    }
+    
 }

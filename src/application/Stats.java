@@ -7,7 +7,7 @@ public class Stats
 {
 	// Tracks and displays statistics of the game
 	
-	private int totalGame;
+	private int gamesPlayed;
 	private float winRate;
 	private int currentStreak;
 	private int maxStreak;
@@ -20,7 +20,7 @@ public class Stats
 	
 	public Stats(int n, float r, int cs, int ms, Map<Integer, Integer> hm)
 	{
-		this.setTotalGame(n);
+		this.setGamesPlayed(n);
 		this.setWinRate(r);
 		this.setCurrentStreak(cs);
 		this.setMaxStreak(ms);
@@ -28,7 +28,7 @@ public class Stats
 	}
 	
 	private void resetStats() {
-        setTotalGame(0);
+		setGamesPlayed(0);
         setWinRate(0.0f);
         setCurrentStreak(0);
         setMaxStreak(0);
@@ -43,9 +43,9 @@ public class Stats
 		resetStats();		
 	}
 
-	public int getTotalGame() 
+	public int getGamesPlayed() 
 	{
-		return totalGame;
+		return gamesPlayed;
 	}
 
 	public float getWinRate() 
@@ -68,9 +68,9 @@ public class Stats
 		return guessesDistribution;
 	}
 
-	public void setTotalGame(int totalGame) 
+	public void setGamesPlayed(int g) 
 	{
-		this.totalGame = totalGame;
+		this.gamesPlayed = g;
 	}
 	
 	public void setWinRate(float winRate) 
@@ -96,9 +96,9 @@ public class Stats
 	public void updateCurrentStats(Log l)
 	{
 		// update the private members with log
-		totalGame = l.getTotalGames().size();
+		gamesPlayed = l.getTotalGames().size();
 		
-		if (totalGame == 0)
+		if (gamesPlayed == 0)
 		{
 			return;
 		}
@@ -107,7 +107,7 @@ public class Stats
 		int curWin = 0;
 		int maxWin = 0;
 		
-		for (int i = 0; i < totalGame; i++)
+		for (int i = 0; i < gamesPlayed; i++)
 		{
 			GameSession currSession = l.getTotalGames().get(i);
 			if (currSession.getWon())
@@ -130,7 +130,7 @@ public class Stats
 				
 			}
 		}
-		winRate = (float) sumWin / (float) totalGame;
+		winRate = (float) sumWin / (float) gamesPlayed * 100;
 		currentStreak = curWin;
 		maxStreak = maxWin;
 	}
