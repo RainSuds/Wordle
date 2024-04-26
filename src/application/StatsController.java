@@ -3,6 +3,7 @@ package application;
 import java.util.Map;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Rectangle;
@@ -46,7 +47,7 @@ public class StatsController
     {
     	// change all the labels: gamesPlayed, winRate, currentStreak, maxStreak.
     	// update all the win distribution bar length and number
-        
+    	
     	gamesPlayed.setText(String.valueOf(stats.getGamesPlayed()));
     	winRate.setText(String.format("%.2f%%", stats.getWinRate()));
     	currentStreak.setText(String.valueOf(stats.getCurrentStreak()));
@@ -61,7 +62,6 @@ public class StatsController
 
         for (int i = 1; i <= winLabels.length; i++) {
             int wins = distribution.getOrDefault(i, 0);
-            System.out.println("i: " + i + ", wins: " + wins);
             winLabels[i - 1].setText(String.valueOf(wins));
             if (wins > 0) {
                 double progressWidth = (200.0 * wins) / maxGuesses; // Assumes max width of 200 for the bar

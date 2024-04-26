@@ -7,14 +7,14 @@ public class GameSession
 {
     int gameNumber;
     boolean won;
-    SelectWord targetWord;
+    SelectWord currentWord;
     List<String> previousGuesses;
     
     public GameSession()
     {
     	this.gameNumber = 0;
         this.won = false;
-        this.targetWord = new SelectWord(); // Initialize with a new SelectWord
+        this.currentWord = new SelectWord(); // Initialize with a new SelectWord
         this.previousGuesses = new ArrayList<String>();
     }
     
@@ -22,7 +22,7 @@ public class GameSession
     {
         this.gameNumber = gameNumber;
         this.won = false;
-        this.targetWord = new SelectWord(); // Initialize with a new SelectWord
+        this.currentWord = new SelectWord(); // Initialize with a new SelectWord
         this.previousGuesses = new ArrayList<String>();
     }
 
@@ -30,7 +30,7 @@ public class GameSession
     {
         this.gameNumber = gameNumber;
         this.won = won;
-        this.targetWord = targetWord; // Expecting a SelectWord object
+        this.currentWord = targetWord; // Expecting a SelectWord object
         this.previousGuesses = previousGuesses;
     }
     
@@ -44,9 +44,9 @@ public class GameSession
     	return won;
     }
     
-    public SelectWord getTargetWord()
+    public SelectWord getCurrentWord()
     {
-    	return targetWord;
+    	return currentWord;
     }
     
     public List<String> getPreviousGuesses()
@@ -64,9 +64,9 @@ public class GameSession
     	this.won = b;
     }
     
-    public void setTargetWord(SelectWord sw)
+    public void setCurrentWord(SelectWord sw)
     {
-    	this.targetWord = sw;
+    	this.currentWord = sw;
     }
     
     public void setPreviousGuesses(List<String> l)
@@ -92,12 +92,14 @@ public class GameSession
 
     @Override
     public String toString() {
-        return "GameSession{" +
-               "gameNumber=" + gameNumber +
-               ", won=" + won +
-               ", targetWord='" + targetWord + '\'' +
-               ", previousGuesses=" + previousGuesses +
-               '}';
+    	String s1 = gameNumber + "\n" + won + "\n" + currentWord + "\n";
+    	String s2 = "";
+    	
+    	for (String s : previousGuesses)
+    	{
+    		s2 += s + " ";
+    	}
+        return s1 + "\n" + s2;
     }
 }
 

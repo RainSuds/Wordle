@@ -71,7 +71,7 @@ public class GameBoard
 	
 	public boolean isValidInput(String word)
 	{
-		return log.getCurrentSession().getTargetWord().wordInWordList(word) && word.length() == log.getCurrentSession().getTargetWord().getWORD_LENGTH();
+		return log.getCurrentSession().getCurrentWord().wordInWordList(word) && word.length() == log.getCurrentSession().getCurrentWord().getWORD_LENGTH();
 	}
 	
 	public void clear() 
@@ -85,7 +85,7 @@ public class GameBoard
 	{
         String guess = guessingWord.getText().toUpperCase();
         Label[] currentRow = shadowData.getCurrentGame()[shadowData.getCurrentRowIndex()];
-        String correctWord = log.getCurrentSession().getTargetWord().getTargetWord();
+        String correctWord = log.getCurrentSession().getCurrentWord().getTargetWord();
         shadowData.updateGameState(guess, correctWord, currentRow);
         shadowData.incrementCurrentRowIndex();
 
@@ -100,7 +100,8 @@ public class GameBoard
 	
 	public void saveGame() 
 	{
-		log.saveCurrentGame();
+		// todo
+		log.saveGame(log.getCurrentSession(), log.getLogFile());
 	}
 
 	public void resetGameBoard() 

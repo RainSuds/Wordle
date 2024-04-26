@@ -38,6 +38,7 @@ public class GameController
 		initializingTable();
 		guessInput = new TextField();
 		createGameController(table, new GameBoard(new Log(), new ShadowData(table), new Stats()));
+		initializingUI();
 	}
 	
 	public void initializingTable()
@@ -53,6 +54,15 @@ public class GameController
 		        };
 	}
 	
+	public void initializingUI()
+	{
+		for (Label[] row : table) {
+	        for (Label label : row) {
+	            ColorStyle.GREY.applyBorder(label);
+	        }
+	    }
+	}
+	
 	public void createGameController(Label[][] t, GameBoard g) 
 	{	
 		guessInput = new TextField();
@@ -63,7 +73,7 @@ public class GameController
 		initializeKeyboardButtons();
 		setupKeyHandlers();
 		
-		System.out.println(newGame.getLog().getCurrentSession().getTargetWord().getTargetWord()); // display target for testing
+		System.out.println(newGame.getLog().getCurrentSession().getCurrentWord().getTargetWord()); // display target for testing
 	}
 	
 	private void setupKeyHandlers() 
@@ -83,14 +93,17 @@ public class GameController
 	
 	public void clearUI() 
 	{
-		for (Label[] row : table) {
-	        for (Label label : row) {
+		for (Label[] row : table) 
+		{
+	        for (Label label : row) 
+	        {
 	            label.setText("");
-	            ColorStyle.GREY.applyStyle(label);;
+	            ColorStyle.GREY.applyBackground(label);;
 	        }
 	    }
-		for (Button button : keyboardButtons.values()) {
-	        ColorStyle.LIGHTGREY.applyStyle(button);  // Clear any custom styles
+		for (Button button : keyboardButtons.values()) 
+		{
+	        ColorStyle.LIGHTGREY.applyBackground(button);  // Clear any custom styles
 	        button.setDisable(false);  // Optionally re-enable the button if disabled during gameplay
 	    }
 		guessInput.clear();
@@ -109,7 +122,7 @@ public class GameController
 		if (guessInput.getText().length() < 5) 
 		{
             guessInput.appendText(c.toUpperCase());
-            updateLabels();
+            updateLabelsUI();
         }
 	}
 	
@@ -119,7 +132,7 @@ public class GameController
 		if (len > 0)
 		{
 			guessInput.deleteText(len - 1, len);
-			updateLabels();
+			updateLabelsUI();
 		}
 		
 	}
@@ -147,7 +160,7 @@ public class GameController
 				showAlertDialog("Invalid word or not in list!");
 			}
 		}
-		updateLabels();
+		updateLabelsUI();
 		updateKeyboard();
 	}
 	
@@ -231,14 +244,20 @@ public class GameController
         ShadowData shadowData = newGame.getShadowData();
         shadowData.clear();
         shadowData.createNewGame();  // Only call if you need to recreate the game structure
-        updateLabels();
+        updateLabelsUI();
         updateKeyboard();
     }
     
-	private void updateLabels() 
+	private void updateLabelsUI() 
 	{
 		// update label inputs
+		
 		int currRow = newGame.getShadowData().getCurrentRowIndex();
+		
+		if (currRow >= 6) {
+	        // Do not update UI if all guesses are used
+	        return;
+	    }		
 		Label[] currLabels = newGame.getShadowData().getCurrentGame()[currRow];
 		
 		String currGuess = guessInput.getText().toUpperCase();
@@ -247,6 +266,7 @@ public class GameController
         	if (i < currLabels.length) 
         	{
                 currLabels[i].setText(String.valueOf(currGuess.charAt(i)));
+                ColorStyle.MEDIUMGREY.applyBorder(currLabels[i]);
         	}
         }
 
@@ -254,6 +274,7 @@ public class GameController
         for (int j = currGuess.length(); j < currLabels.length; j++) 
         {
         	currLabels[j].setText("");
+        	ColorStyle.GREY.applyBorder(currLabels[j]);
         }
     }
 	
@@ -266,7 +287,7 @@ public class GameController
             Button button = keyboardButtons.get(key);
             if (button != null) 
             {
-                style.applyStyle(button); // Use the enum's method to apply the style
+                style.applyBackground(button); // Use the enum's method to apply the style
             }
         }
     }

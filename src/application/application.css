@@ -1,4 +1,6 @@
 /* Button styles */
+
+
 .button {
     -fx-text-fill: white; /* White text */
     -fx-font-weight: bold; /* Bold font */

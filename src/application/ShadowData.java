@@ -146,7 +146,7 @@ public class ShadowData
 		
 		reset();
 		List<String> previousGuesses = g.getPreviousGuesses();
-        String targetWord = g.getTargetWord().getTargetWord();
+        String targetWord = g.getCurrentWord().getTargetWord();
 
         for (String guess : previousGuesses) 
         {
@@ -176,18 +176,18 @@ public class ShadowData
             if (letter == targetWord.charAt(i)) 
             {
                 addUsedLetter(letter, ColorStyle.GREEN);
-                ColorStyle.GREEN.applyStyle(label);
+                ColorStyle.GREEN.applyBackground(label);
                 letterFrequency.put(letter, letterFrequency.get(letter) - 1);
             }
             else if (letterFrequency.getOrDefault(letter, 0) > 0) 
             {
                 addUsedLetter(letter, ColorStyle.YELLOW);
-                ColorStyle.YELLOW.applyStyle(label);
+                ColorStyle.YELLOW.applyBackground(label);
                 letterFrequency.put(letter, letterFrequency.get(letter) - 1);
             } 
             else 
             {
-                ColorStyle.GREY.applyStyle(label);
+                ColorStyle.GREY.applyBackground(label);
                 addUsedLetter(letter, ColorStyle.GREY);
             }
         }

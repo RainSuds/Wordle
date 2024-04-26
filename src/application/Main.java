@@ -48,7 +48,6 @@ public class Main extends Application
         {
             if (event.getCode() == KeyCode.ENTER) 
             {
-                System.out.println("Key Pressed: " + event.getCode());
                 controller.handleEnterKeyPress();
                 event.consume();
             }

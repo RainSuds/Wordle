@@ -30,12 +30,13 @@ public class Log
 	
 	public File createNewFile(String fileName)
 	{
-		File f = new File(fileName);
+		String resourcePath = "src/resources/" + fileName;
+		File f = new File(resourcePath);
 		if (!f.exists())
 		{
 			try
 			{
-				logFile.createNewFile();
+				f.createNewFile();
 			}
 			catch(IOException e)
 			{
@@ -111,12 +112,6 @@ public class Log
 		setCurrentSession(newSession());
 	}
 	
-	public void saveCurrentGame() 
-	{
-		// Save current games
-		saveGame(currentSession, logFile);
-    }
-	
 	public GameSession newSession()
 	{
 		GameSession newSession = new GameSession(totalGames.size() + 1);
@@ -130,7 +125,7 @@ public class Log
 		currentSession.setGameNumber(gameNum);
 		currentSession.setWon(won);
 		currentSession.getPreviousGuesses().add(guessWord);
-		currentSession.setTargetWord(new SelectWord(targetWord));
+		currentSession.setCurrentWord(new SelectWord(targetWord));
 	}
 	
 	public void saveGame(GameSession s, File f) 
@@ -138,10 +133,7 @@ public class Log
 		// Save games
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(f, true))) 
         {
-            writer.write(s.getGameNumber() + "\n");
-            writer.write((s.getWon() ? "1" : "0") + "\n");
-            writer.write(s.getTargetWord().getTargetWord() + "\n");
-            writer.write(s.toString() + "\n");
+            writer.write(s.toString());
         } 
         catch (IOException e) 
         {
