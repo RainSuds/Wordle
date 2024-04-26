@@ -1,9 +1,12 @@
 package application;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -14,36 +17,33 @@ public class GameBoard
 {
 	// Track progress of the game and main implementation
 	private Log log;
-    private SelectWord selectWord;
     private ShadowData shadowData;
     private Stats stats;
 	
 	public GameBoard()
 	{
 		// Initialize components
-        this.setLog(new Log());
-        this.selectWord = new SelectWord();
-        this.shadowData = new ShadowData();
-        this.setStats(new Stats());
+		createGameBoard();
 	}
 
-	public GameBoard(Log l, SelectWord sw, ShadowData sd, Stats s)
+	public GameBoard(Log l, ShadowData sd, Stats s)
 	{
 		// Initialize components
         this.setLog(l);
-        this.setSelectWord(sw);
         this.setShadowData(sd);
         this.setStats(s);
+	}
+	
+	public void createGameBoard()
+	{
+		this.setLog(new Log());
+        this.shadowData = new ShadowData();
+        this.setStats(new Stats());
 	}
 	
 	public Log getLog() 
 	{
 		return log;
-	}
-	
-	public SelectWord getSelectWord() 
-	{
-		return selectWord;
 	}
 	
 	public ShadowData getShadowData() 
@@ -60,11 +60,6 @@ public class GameBoard
 		this.log = l;
 	}
 	
-	public void setSelectWord(SelectWord s) 
-	{
-		this.selectWord = s;
-	}
-	
 	public void setShadowData(ShadowData sd) 
 	{
 		this.shadowData = sd;
@@ -73,78 +68,78 @@ public class GameBoard
 	public void setStats(Stats stats) {
 		this.stats = stats;
 	}
-
+	
 	public boolean isValidInput(String word)
 	{
-		return selectWord.wordInWordList(word) || word.length() == selectWord.getWORD_LENGTH();
+		return log.getCurrentSession().getTargetWord().wordInWordList(word) && word.length() == log.getCurrentSession().getTargetWord().getWORD_LENGTH();
 	}
 	
-	public boolean checkGuesses(TextField guessingWord)
+	public void clear() 
 	{
-		// Check the input
-		String guess = guessingWord.getText().toUpperCase();
-		
-		Label[][] currentGame = shadowData.getCurrentGame();
-		Label[] currentRow = currentGame[shadowData.getCurrentRow()];
-		String correctWord = selectWord.getTargetWord();
-		
-		Map<Character, Integer> letterFrequency = new HashMap<>();
-		for (char c : correctWord.toCharArray()) {
-	        letterFrequency.put(c, letterFrequency.getOrDefault(c, 0) + 1);
-	    }
-		
-		// First pass: check for correct positions
-	    for (int i = 0; i < correctWord.length(); i++) {
-	        char letter = guess.charAt(i);
-	        Label label = currentRow[i];
-	        label.setText(String.valueOf(letter).toUpperCase()); // Set text as uppercase
-	        if (letter == correctWord.charAt(i)) {
-	            label.setStyle("-fx-background-color: #538D4E;"); // Green for correct position
-	            letterFrequency.put(letter, letterFrequency.get(letter) - 1); // Decrease count
-	        }
-	    }
-
-	    // Second pass: check for correct letters in wrong positions
-	    for (int i = 0; i < correctWord.length(); i++) {
-	        char letter = guess.charAt(i);
-	        Label label = currentRow[i];
-	        if (letter != correctWord.charAt(i)) {
-	            if (letterFrequency.getOrDefault(letter, 0) > 0) {
-	                label.setStyle("-fx-background-color: #B59F3B;"); // Yellow for correct letter, wrong place
-	                letterFrequency.put(letter, letterFrequency.get(letter) - 1); // Decrease count
-	            } else {
-	                label.setStyle("-fx-background-color: #3A3A3C;"); // Gray for incorrect letter
-	            }
-	        }
-	    }
-		
-	    shadowData.incrementCurrentRow();
-	    
-		if (guess.equals(correctWord))
-		{
-			return true;
-		}
-		
-		log.updateCurrentSession(log.getTotalGames().size(), guess, correctWord);
-
-		
-		return false;
+		shadowData.clear();
+		log.clear();
+	    stats.clear();
 	}
+	
+	
+	public boolean checkGuesses(TextField guessingWord) 
+	{
+        String guess = guessingWord.getText().toUpperCase();
+        Label[] currentRow = shadowData.getCurrentGame()[shadowData.getCurrentRowIndex()];
+        String correctWord = log.getCurrentSession().getTargetWord().getTargetWord();
+        shadowData.updateGameState(guess, correctWord, currentRow);
+        shadowData.incrementCurrentRowIndex();
+
+        if (guess.equals(correctWord)) {
+            log.logSession(log.getTotalGames().size(), true, guess, correctWord);
+            return true;
+        }
+
+        log.logSession(log.getTotalGames().size(), false, guess, correctWord);
+        return false;
+    }
 	
 	public void saveGame() 
 	{
-		// TODO Auto-generated method stub
-		
+		log.saveCurrentGame();
 	}
 
-	public void resetGameBoard() {
-		// TODO Auto-generated method stub
-		
+	public void resetGameBoard() 
+	{
+		shadowData.reset();
+        log.reset();
+        stats.updateCurrentStats(log);
 	}
 
-	public void loadFile(String fileName) {
-		// TODO Auto-generated method stub
-		
+	public void loadFile(String fileName) 
+	{
+		try {
+	        clear(); 
+	        createGameBoard();
+
+	        GameSession currentSession = log.loadGame(fileName);
+
+	        if (currentSession != null) 
+	        {
+	            shadowData.loadGame(currentSession);
+	            stats.updateCurrentStats(log);
+
+	            updateUI();
+	        } 
+	        else 
+	        {
+	            throw new RuntimeException("Failed to load game session from file.");
+	        }
+	    } 
+		catch (Exception e) 
+		{
+	        System.err.println("Error loading the game file: " + e.getMessage());
+	    }
+	}
+	
+	private void updateUI() {
+	    // Implement this method to update your user interface with the new game state.
+	    // This might include updating labels, resetting input fields, etc.
 	}
 
 }

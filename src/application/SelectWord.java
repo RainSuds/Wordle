@@ -19,6 +19,13 @@ public class SelectWord
 		//this.wordList = loadWordsFromAbsolutePath("C:\\Users\\13198\\OneDrive\\Documents\\TAMU\\CSCE314\\Java\\Wordle\\src\\resources\\wordList.txt");
         this.targetWord = selectRandomWord(); // Selects a random word after list is populated.
 	}
+	
+	public SelectWord(String s)
+	{
+		// Constructor
+		this.wordList = loadWordsFromResource("resources/wordList.txt");
+		this.targetWord = s;
+	}
 
 	public int getWORD_LENGTH() {
 		return WORD_LENGTH;
@@ -29,9 +36,6 @@ public class SelectWord
 		return targetWord;
 	}
 	
-	public void setWORD_LENGTH(int w) {
-		WORD_LENGTH = w;
-	}
 
 	public void setTargetWord(String targetWord) 
 	{
@@ -74,8 +78,6 @@ public class SelectWord
         	e.printStackTrace();
             throw new RuntimeException("Failed to read the word list", e);
         }
-        
-                
 		return wordList;
 	}
 	
@@ -112,7 +114,10 @@ public class SelectWord
 	}
 	
 	@Override
-    public String toString() {
+    public String toString() 
+	{
         return wordListToString(wordList);
     }
+
+	
 }

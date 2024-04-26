@@ -15,14 +15,7 @@ public class Stats
 	
 	public Stats()
 	{
-		setTotalGame(0);
-		setWinRate(0);
-		setCurrentStreak(0);
-		setMaxStreak(0);
-		setGuessesDistribution(new HashMap<>());
-		for (int i = 1; i <= 6; i++) {
-			guessesDistribution.put(i, 0);
-        }
+		resetStats();
 	}
 	
 	public Stats(int n, float r, int cs, int ms, Map<Integer, Integer> hm)
@@ -32,6 +25,22 @@ public class Stats
 		this.setCurrentStreak(cs);
 		this.setMaxStreak(ms);
 		this.setGuessesDistribution(hm);
+	}
+	
+	private void resetStats() {
+        setTotalGame(0);
+        setWinRate(0.0f);
+        setCurrentStreak(0);
+        setMaxStreak(0);
+        setGuessesDistribution(new HashMap<>());
+        for (int i = 1; i <= 6; i++) {
+            guessesDistribution.put(i, 0);
+        }
+    }
+	
+	public void clear() 
+	{
+		resetStats();		
 	}
 
 	public int getTotalGame() 
@@ -125,4 +134,5 @@ public class Stats
 		currentStreak = curWin;
 		maxStreak = maxWin;
 	}
+	
 }

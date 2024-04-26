@@ -7,14 +7,14 @@ public class GameSession
 {
     int gameNumber;
     boolean won;
-    String targetWord;
+    SelectWord targetWord;
     List<String> previousGuesses;
     
     public GameSession()
     {
     	this.gameNumber = 0;
         this.won = false;
-        this.targetWord = "";
+        this.targetWord = new SelectWord(); // Initialize with a new SelectWord
         this.previousGuesses = new ArrayList<String>();
     }
     
@@ -22,15 +22,15 @@ public class GameSession
     {
         this.gameNumber = gameNumber;
         this.won = false;
-        this.targetWord = "";
+        this.targetWord = new SelectWord(); // Initialize with a new SelectWord
         this.previousGuesses = new ArrayList<String>();
     }
 
-    public GameSession(int gameNumber, boolean won, String targetWord, List<String> previousGuesses) 
+    public GameSession(int gameNumber, boolean won, SelectWord targetWord, List<String> previousGuesses) 
     {
         this.gameNumber = gameNumber;
         this.won = won;
-        this.targetWord = targetWord;
+        this.targetWord = targetWord; // Expecting a SelectWord object
         this.previousGuesses = previousGuesses;
     }
     
@@ -44,7 +44,7 @@ public class GameSession
     	return won;
     }
     
-    public String getTargetWord()
+    public SelectWord getTargetWord()
     {
     	return targetWord;
     }
@@ -64,9 +64,9 @@ public class GameSession
     	this.won = b;
     }
     
-    public void setTargetWord(String w)
+    public void setTargetWord(SelectWord sw)
     {
-    	this.targetWord = w;
+    	this.targetWord = sw;
     }
     
     public void setPreviousGuesses(List<String> l)
@@ -78,26 +78,26 @@ public class GameSession
     public boolean isFinished() 
     {
     	// check if the current session is finished
-    	if (won == true)
+    	if (won)
     	{
     		return true;
     	}
     	else
     	{
-    		if (previousGuesses.size() == 6)
-    		{
-    			return true;
-    		}
+    		return previousGuesses.size() == 6;
     	}
-		return false;
+		
     }
 
 
     @Override
-    public String toString() 
-    {
-        // Convert the previous guesses list to a space-separated string
-        return String.join(" ", previousGuesses);
+    public String toString() {
+        return "GameSession{" +
+               "gameNumber=" + gameNumber +
+               ", won=" + won +
+               ", targetWord='" + targetWord + '\'' +
+               ", previousGuesses=" + previousGuesses +
+               '}';
     }
 }
 
