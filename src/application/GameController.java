@@ -1,15 +1,20 @@
 package application;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 
 public class GameController 
 {
@@ -123,19 +128,13 @@ public class GameController
 	public void checkGuess()
 	{
 		// Check current input
-		boolean won = false;
 		if (newGame.isValidInput(guessInput.getText().toUpperCase()))
 		{
-			won = newGame.checkGuesses(guessInput);
-			if (newGame.getLog().getCurrentSession().isFinished())
+			boolean won = newGame.checkGuesses(guessInput);
+			guessInput.clear();
+			if (won || newGame.getLog().getCurrentSession().isFinished())
 			{
-				newGame.saveGame();
-				newGame.getStats().updateCurrentStats(newGame.getLog());
-				guessInput.clear();
-			}
-			else
-			{
-				guessInput.clear();
+				showStatScreen();
 			}
 		}
 		else
@@ -144,10 +143,10 @@ public class GameController
 			{
 				showAlertDialog("Too Short!");
 			}
-			else 
+			else
 			{
 				showAlertDialog("Invalid word or not in list!");
-			}			
+			}
 		}
 		updateLabels();
 		updateKeyboard();
@@ -165,7 +164,6 @@ public class GameController
 	
     public void handleKeyPress(KeyCode keyCode) 
     {
-    	System.out.println("Key Pressed: " + keyCode);  // Debugging output
     	// Record key press actions
         if (keyCode.isLetterKey()) 
         {
@@ -274,5 +272,29 @@ public class GameController
         }
     }
 	
+	
+	private void showStatScreen() {
+	    try 
+	    {
+	        // Load the statistics screen
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/StatsScreen.fxml"));
+	        Parent root = loader.load();
+
+	        // You could pass data to your StatScreen controller if needed
+	        StatsController statController = loader.getController();
+	        statController.setStats(newGame.getStats());
+
+	        // Set up the stage
+	        Stage statStage = new Stage();
+	        statStage.setTitle("Statistics");
+	        statStage.setScene(new Scene(root));
+	        statStage.show();
+	    }
+	    catch (IOException e) 
+	    {
+	        e.printStackTrace();
+	    }
+	}
+
 
 }

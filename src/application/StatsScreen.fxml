@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane stylesheets="@application.css" prefHeight="300.0" prefWidth="200.0" style="-fx-background-color: #121213;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.StatsController">
+   <children>
+      <VBox alignment="TOP_RIGHT" prefHeight="32.0" prefWidth="247.0">
+         <children>
+            <Button fx:id="CLOSE" mnemonicParsing="false" onAction="#closeScreen" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #121213;" text="X" textAlignment="CENTER" textFill="WHITE" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutY="28.0" prefHeight="273.0" prefWidth="247.0">
+         <children>
+            <ImageView id="icon" fitHeight="64.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="https://static01.nyt.com/images/2022/03/02/crosswords/alpha-wordle-icon-new/alpha-wordle-icon-new-square320-v3.png?format=pjpg&amp;quality=75&amp;auto=webp&amp;disable=upscale" />
+               </image>
+            </ImageView>
+            <Label text="Wordle" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="STATISTIC" textAlignment="CENTER" textFill="WHITE">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="19.0" prefWidth="200.0">
+               <children>
+                  <Label text="0" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+                  <Label text="0" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+                  <Label text="0" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+                  <Label text="0" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" right="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="19.0" prefWidth="200.0">
+               <children>
+                  <Label text="Played" textAlignment="CENTER" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="2.0" right="2.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="3.0" right="3.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Win %" textAlignment="CENTER" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="2.0" right="2.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="3.0" right="3.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Current Streak" textAlignment="CENTER" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="2.0" right="2.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="3.0" right="3.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Max Streak" textAlignment="CENTER" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="2.0" right="2.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="3.0" right="3.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox prefHeight="0.0" prefWidth="221.0">
+               <children>
+                  <StackedBarChart alternativeRowFillVisible="false" disable="true" horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" legendVisible="false" title="GUESS DISTRIBUTION" verticalGridLinesVisible="false" verticalZeroLineVisible="false">
+                    <xAxis>
+                      <CategoryAxis autoRanging="false" side="LEFT" visible="false" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis id="distribution" lowerBound="6.0" minorTickVisible="false" tickLabelFill="WHITE" tickLength="2.0" upperBound="0.0" />
+                    </yAxis>
+                  </StackedBarChart>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

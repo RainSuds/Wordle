@@ -22,22 +22,14 @@ public class Main extends Application
         try 
         {
             // Load the FXML and get the root node
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Sample.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("GameScreen.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root, 700, 700);
 
             GameController controller = loader.getController();
             
-            scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> 
-            {
-            	// ENTER handles bad, that's why I am handling it individually            	
-                if (event.getCode() == KeyCode.ENTER) 
-                {
-                	System.out.println("Key Pressed: " + event.getCode());
-                    controller.handleEnterKeyPress();
-                    event.consume();
-                }
-            });
+            setupKeyEventHandling(scene, controller);
+            
             scene.setOnKeyPressed(event -> controller.handleKeyPress(event.getCode()));
 
             primaryStage.setTitle("Wordle");
@@ -48,5 +40,24 @@ public class Main extends Application
         {
             e.printStackTrace();
         }
+    }
+    
+    private void setupKeyEventHandling(Scene scene, GameController controller) 
+    {
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> 
+        {
+            if (event.getCode() == KeyCode.ENTER) 
+            {
+                System.out.println("Key Pressed: " + event.getCode());
+                controller.handleEnterKeyPress();
+                event.consume();
+            }
+        });
+
+        scene.setOnKeyPressed(event -> 
+        {
+            // Handle all other key presses
+            controller.handleKeyPress(event.getCode());
+        });
     }
 }

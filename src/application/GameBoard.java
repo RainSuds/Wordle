@@ -82,6 +82,12 @@ public class GameBoard
 	}
 	
 	
+	public void recordWin(String guessWord, String correctWord)
+	{
+		log.logSession(log.getTotalGames().size(), true, guessWord, correctWord);
+		stats.updateCurrentStats(log);
+	}
+	
 	public boolean checkGuesses(TextField guessingWord) 
 	{
         String guess = guessingWord.getText().toUpperCase();
@@ -91,7 +97,7 @@ public class GameBoard
         shadowData.incrementCurrentRowIndex();
 
         if (guess.equals(correctWord)) {
-            log.logSession(log.getTotalGames().size(), true, guess, correctWord);
+        	recordWin(guess, correctWord);
             return true;
         }
 

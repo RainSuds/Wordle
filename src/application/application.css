@@ -1,1 +1,25 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* Button styles */
+.button {
+    -fx-text-fill: white; /* White text */
+    -fx-font-weight: bold; /* Bold font */
+}
+
+/* Label styles */
+.label {
+    -fx-text-fill: #ffffff; /* White text */
+}
+
+/* Chart background and line colors */
+.bar-chart {
+    -fx-background-color: #333333; /* Dark background for the chart */
+}
+
+.bar-chart .axis {
+    -fx-tick-label-fill: #ffffff; /* White tick labels */
+    -fx-axis-label-fill: #ffffff; /* White axis labels */
+}
+
+/* Specific to horizontal zero lines if needed */
+.bar-chart .chart-horizontal-grid-lines .chart-horizontal-zero-line {
+    -fx-stroke: #ffff00; /* Yellow zero line */
+}
