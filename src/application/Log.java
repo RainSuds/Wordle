@@ -115,17 +115,25 @@ public class Log
 	public GameSession newSession()
 	{
 		GameSession newSession = new GameSession(totalGames.size() + 1);
-		totalGames.add(currentSession);
+		currentSession = newSession;
+		totalGames.add(newSession);
 		return newSession;
 	}
 	
 	public void logSession(int gameNum, boolean won, String guessWord, String targetWord)
 	{
-		// Use for update currentSession
-		currentSession.setGameNumber(gameNum);
-		currentSession.setWon(won);
-		currentSession.getPreviousGuesses().add(guessWord);
-		currentSession.setCurrentWord(new SelectWord(targetWord));
+		// Use for update currentSession		
+	    if (currentSession.getPreviousGuesses() instanceof ArrayList) 
+	    {
+	        currentSession.getPreviousGuesses().add(guessWord);
+	    } 
+	    else 
+	    {
+	        List<String> newGuesses = new ArrayList<>(currentSession.getPreviousGuesses());
+	        newGuesses.add(guessWord);
+	        currentSession.setPreviousGuesses(newGuesses);
+	    }
+	    currentSession.setCurrentWord(new SelectWord(targetWord));
 	}
 	
 	public void saveGame(GameSession s, File f) 
@@ -162,12 +170,14 @@ public class Log
 	            
 	            GameSession session = new GameSession(gameNumber, won, new SelectWord(targetWord), previousGuesses);
 	            totalGames.add(session);
-	            System.out.println(session);
+	            System.out.println("Session: " + session);
 	        }
-	        if (!totalGames.isEmpty() && getLastSession().isFinished()) {
-	            currentSession = newSession(); // Start new session if the last one is finished
-	        } else {
-	            currentSession = getLastSession(); // Continue with the last session
+	        if (!totalGames.isEmpty() && getLastSession().isFinished()) 
+	        {
+	            currentSession = newSession(); 
+	        } else 
+	        {
+	            currentSession = getLastSession(); 
 	        }
 	    } 
 	    catch (IOException e) 

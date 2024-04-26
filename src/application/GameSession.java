@@ -89,7 +89,6 @@ public class GameSession
 		
     }
 
-
     @Override
     public String toString() {
     	String s1 = gameNumber + "\n" + won + "\n" + currentWord + "\n";
@@ -99,7 +98,7 @@ public class GameSession
     	{
     		s2 += s + " ";
     	}
-        return s1 + "\n" + s2;
+        return s1 + s2;
     }
 }
 

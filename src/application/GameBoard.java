@@ -100,18 +100,10 @@ public class GameBoard
 	
 	public void saveGame() 
 	{
-		// todo
 		log.saveGame(log.getCurrentSession(), log.getLogFile());
 	}
 
-	public void resetGameBoard() 
-	{
-		shadowData.reset();
-        log.reset();
-        stats.updateCurrentStats(log);
-	}
-
-	public void loadFile(String fileName) 
+	public void loadFile(String fileName, Label[][] t) 
 	{
 		try {
 	        clear(); 
@@ -121,10 +113,8 @@ public class GameBoard
 
 	        if (currentSession != null) 
 	        {
-	            shadowData.loadGame(currentSession);
+	            shadowData.loadGame(currentSession, t);
 	            stats.updateCurrentStats(log);
-
-	            updateUI();
 	        } 
 	        else 
 	        {
@@ -137,9 +127,5 @@ public class GameBoard
 	    }
 	}
 	
-	private void updateUI() {
-	    // Implement this method to update your user interface with the new game state.
-	    // This might include updating labels, resetting input fields, etc.
-	}
 
 }

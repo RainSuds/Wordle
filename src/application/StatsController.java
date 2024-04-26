@@ -49,7 +49,7 @@ public class StatsController
     	// update all the win distribution bar length and number
     	
     	gamesPlayed.setText(String.valueOf(stats.getGamesPlayed()));
-    	winRate.setText(String.format("%.2f%%", stats.getWinRate()));
+    	winRate.setText(String.format("%.0f", stats.getWinRate()));
     	currentStreak.setText(String.valueOf(stats.getCurrentStreak()));
     	maxStreak.setText(String.valueOf(stats.getMaxStreak()));
 

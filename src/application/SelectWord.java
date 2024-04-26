@@ -113,10 +113,9 @@ public class SelectWord
 	    return String.join(", ", wordList);
 	}
 	
-	@Override
     public String toString() 
 	{
-        return wordListToString(wordList);
+        return targetWord;
     }
 
 	

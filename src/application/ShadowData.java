@@ -16,7 +16,19 @@ public class ShadowData
 	public ShadowData()
 	{
 		// Constructor
-		createNewGame();
+		setCurrentRowIndex(0);
+		setUsedLetters(new HashMap<Character, ColorStyle>());
+        int rows = 6;
+        int columns = 5;
+        currentGameTable = new Label[rows][columns];
+
+        for (int i = 0; i < rows; i++) 
+        {
+            for (int j = 0; j < columns; j++) 
+            {
+            	currentGameTable[i][j] = new Label();
+            }
+        }
 	}
 	
 	public ShadowData(Label[][] cg)
@@ -39,11 +51,6 @@ public class ShadowData
 		setUsedLetters(ul);
 		setCurrentGame(cg);
 	}
-	
-	public void reset() 
-	{
-        createNewGame();
-    }
 	
 	public void clear()
 	{
@@ -110,50 +117,54 @@ public class ShadowData
 		currentRowIndex++;
 	}
 	
-	private void refreshLabels(Label[] labels) 
+	private void refreshLabels(Label[] r) 
 	{
-	    for (Label label : labels) {
+	    for (Label label : r) {
 	        label.applyCss();
 	        label.layout(); // Force layout update
 	    }
 	}
 	
-	public void createNewGame()
+	public void createNewGame(Label[][] t)
 	{
 		setCurrentRowIndex(0);
 		setUsedLetters(new HashMap<Character, ColorStyle>());
-        int rows = 6;
-        int columns = 5;
-        currentGameTable = new Label[rows][columns];
+        currentGameTable = t;
 
         // Initialize each Label in the array
-        for (int i = 0; i < rows; i++) 
+        if (currentGameTable != null)
         {
-            for (int j = 0; j < columns; j++) 
+        	for (Label[] r : t) 
             {
-            	currentGameTable[i][j] = new Label();
-                currentGameTable[i][j].setStyle("");
+        		refreshLabels(r);
             }
         }
 	}
 	
-	public void loadGame(GameSession g)
+	public void loadGame(GameSession g, Label[][] t)
 	{
 		if (!isEmpty())
 		{
 			clear();
 		}
 		
-		reset();
+		createNewGame(t);
 		List<String> previousGuesses = g.getPreviousGuesses();
         String targetWord = g.getCurrentWord().getTargetWord();
-
+        int index = 0;
+        
         for (String guess : previousGuesses) 
         {
-            if (currentRowIndex < currentGameTable.length) 
-            {
-                updateGameState(guess, targetWord, currentGameTable[currentRowIndex]);
-                currentRowIndex++;
+        	if (index < t.length) 
+        	{  // Using local variable to avoid side effects on global state
+                updateGameState(guess, targetWord, t[index]);
+                index++;
+            } 
+        	else 
+        	{
+                // Handle or log error: more guesses than rows available
+                System.err.println("Error: More previous guesses than rows available in the game table.");
+                break;
             }
         }
 	}

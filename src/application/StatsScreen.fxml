@@ -42,51 +42,54 @@
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="39.0" prefWidth="247.0">
                <children>
-                  <Label fx:id="gamesPlayed" text="0" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="gamesPlayed" text="200" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font size="30.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets right="25.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="winRate" text="0" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font size="30.0" />
+                        <Font size="24.0" />
                      </font>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                      <padding>
-                        <Insets left="25.0" right="25.0" />
+                        <Insets right="15.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="currentStreak" text="0" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="winRate" text="100" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font size="30.0" />
+                        <Font size="24.0" />
                      </font>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                      <padding>
-                        <Insets left="25.0" right="25.0" />
+                        <Insets left="15.0" right="15.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="maxStreak" text="0" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="currentStreak" text="1" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font size="30.0" />
+                        <Font size="24.0" />
                      </font>
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets />
                      </HBox.margin>
                      <padding>
-                        <Insets left="25.0" />
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="maxStreak" text="20" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets left="15.0" />
                      </padding>
                   </Label>
                </children>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </VBox.margin>
             </HBox>
             <HBox prefHeight="19.0" prefWidth="200.0">
                <children>
@@ -135,6 +138,9 @@
                      </padding>
                   </Label>
                </children>
+               <VBox.margin>
+                  <Insets left="2.0" right="2.0" />
+               </VBox.margin>
             </HBox>
             <VBox prefHeight="0.0" prefWidth="221.0">
                <children>

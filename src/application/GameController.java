@@ -38,7 +38,6 @@ public class GameController
 		initializingTable();
 		guessInput = new TextField();
 		createGameController(table, new GameBoard(new Log(), new ShadowData(table), new Stats()));
-		initializingUI();
 	}
 	
 	public void initializingTable()
@@ -54,11 +53,23 @@ public class GameController
 		        };
 	}
 	
+	private void initializeKeyboardButtons() 
+	{
+        // Map for keys
+		keyboardButtons = Map.ofEntries(
+								        Map.entry('Q', Q), Map.entry('W', W), Map.entry('E', E), Map.entry('R', R), Map.entry('T', T), Map.entry('Y', Y), Map.entry('U', U), Map.entry('I', I), Map.entry('O', O), Map.entry('P', P),
+								        Map.entry('A', A), Map.entry('S', S), Map.entry('D', D), Map.entry('F', F), Map.entry('G', G), Map.entry('H', H), Map.entry('J', J), Map.entry('K', K), Map.entry('L', L),
+								        Map.entry('Z', Z), Map.entry('X', X), Map.entry('C', C), Map.entry('V', V),	Map.entry('B', B), Map.entry('N', N), Map.entry('M', M)
+					        			);
+    }
+	
 	public void initializingUI()
 	{
 		for (Label[] row : table) {
 	        for (Label label : row) {
+	        	ColorStyle.BLACK.applyBackground(label);
 	            ColorStyle.GREY.applyBorder(label);
+	            label.setText(null);
 	        }
 	    }
 	}
@@ -71,42 +82,10 @@ public class GameController
 		guessInput.setFocusTraversable(true);
 		guessInput.requestFocus();
 		initializeKeyboardButtons();
-		setupKeyHandlers();
+		initializingUI();
+		guessInput.setOnKeyPressed(event -> handleKeyPress(event.getCode())); // Handles physical keyboard input
 		
 		System.out.println(newGame.getLog().getCurrentSession().getCurrentWord().getTargetWord()); // display target for testing
-	}
-	
-	private void setupKeyHandlers() 
-	{
-	    guessInput.setOnKeyPressed(event -> handleKeyPress(event.getCode()));
-	}
-	
-	private void initializeKeyboardButtons() 
-	{
-        // Map for keys
-		keyboardButtons = Map.ofEntries(
-								        Map.entry('Q', Q), Map.entry('W', W), Map.entry('E', E), Map.entry('R', R), Map.entry('T', T), Map.entry('Y', Y), Map.entry('U', U), Map.entry('I', I), Map.entry('O', O), Map.entry('P', P),
-								        Map.entry('A', A), Map.entry('S', S), Map.entry('D', D), Map.entry('F', F), Map.entry('G', G), Map.entry('H', H), Map.entry('J', J), Map.entry('K', K), Map.entry('L', L),
-								        Map.entry('Z', Z), Map.entry('X', X), Map.entry('C', C), Map.entry('V', V),	Map.entry('B', B), Map.entry('N', N), Map.entry('M', M)
-					        			);
-    }
-	
-	public void clearUI() 
-	{
-		for (Label[] row : table) 
-		{
-	        for (Label label : row) 
-	        {
-	            label.setText("");
-	            ColorStyle.GREY.applyBackground(label);;
-	        }
-	    }
-		for (Button button : keyboardButtons.values()) 
-		{
-	        ColorStyle.LIGHTGREY.applyBackground(button);  // Clear any custom styles
-	        button.setDisable(false);  // Optionally re-enable the button if disabled during gameplay
-	    }
-		guessInput.clear();
 	}
 	
 	private void showAlertDialog(String message) {
@@ -146,6 +125,7 @@ public class GameController
 			guessInput.clear();
 			if (won || newGame.getLog().getCurrentSession().isFinished())
 			{
+				newGame.saveGame();
 				showStatScreen();
 			}
 		}
@@ -161,7 +141,7 @@ public class GameController
 			}
 		}
 		updateLabelsUI();
-		updateKeyboard();
+		updateKeyboardUI();
 	}
 	
 	public void handleEnterKeyPress() 
@@ -196,11 +176,17 @@ public class GameController
     	else if (character.equals("LOAD"))
     	{
     		// Save current progress, open file explorer for another log.txt file
-    		newGame.saveGame();
     		guessInput.clear();
     		String fileName = "test1.txt";
-    		newGame.loadFile(fileName);
-    		refreshGameUI();
+    		initializingTable();
+    		newGame.loadFile(fileName, table); // updates all the classes
+    		createGameController(table, newGame);
+    		
+    		for (String s : newGame.getLog().getCurrentSession().getPreviousGuesses())
+    		{
+    			guessInput.setText(s);
+    			checkGuess();
+    		}
     	}
     	else if (character.equals("HELP"))
     	{
@@ -209,11 +195,12 @@ public class GameController
     	}
     	else if (character.equals("RESET"))
         {
-    		clearUI();
     		initializingTable();
     		Log l = newGame.getLog();
     		l.reset();
     		createGameController(table, new GameBoard(l, new ShadowData(table), new Stats()));
+    		updateLabelsUI();
+    		updateKeyboardUI();
         }
     	else if (character.equals("ENTER")) 
     	{
@@ -240,14 +227,6 @@ public class GameController
         }
     }
     
-    public void refreshGameUI() {
-        ShadowData shadowData = newGame.getShadowData();
-        shadowData.clear();
-        shadowData.createNewGame();  // Only call if you need to recreate the game structure
-        updateLabelsUI();
-        updateKeyboard();
-    }
-    
 	private void updateLabelsUI() 
 	{
 		// update label inputs
@@ -258,9 +237,10 @@ public class GameController
 	        // Do not update UI if all guesses are used
 	        return;
 	    }		
-		Label[] currLabels = newGame.getShadowData().getCurrentGame()[currRow];
 		
+		Label[] currLabels = newGame.getShadowData().getCurrentGame()[currRow];
 		String currGuess = guessInput.getText().toUpperCase();
+		
         for (int i = 0; i < currGuess.length(); i++) 
         {
         	if (i < currLabels.length) 
@@ -278,7 +258,7 @@ public class GameController
         }
     }
 	
-	public void updateKeyboard() 
+	public void updateKeyboardUI() 
 	{
         for (Map.Entry<Character, ColorStyle> entry : newGame.getShadowData().getUsedLetters().entrySet()) 
         {
