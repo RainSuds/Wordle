@@ -73,14 +73,7 @@ public class GameBoard
 	{
 		return log.getCurrentSession().getCurrentWord().wordInWordList(word) && word.length() == log.getCurrentSession().getCurrentWord().getWORD_LENGTH();
 	}
-	
-	public void clear() 
-	{
-		shadowData.clear();
-		log.clear();
-	    stats.clear();
-	}
-	
+
 	public boolean checkGuesses(TextField guessingWord) 
 	{
         String guess = guessingWord.getText().toUpperCase();
@@ -106,7 +99,9 @@ public class GameBoard
 	public void loadFile(String fileName, Label[][] t) 
 	{
 		try {
-	        clear(); 
+			shadowData.clear();
+			log.clear();
+		    stats.clear();
 	        createGameBoard();
 
 	        GameSession currentSession = log.loadGame(fileName);

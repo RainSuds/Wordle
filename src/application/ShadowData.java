@@ -156,7 +156,8 @@ public class ShadowData
         for (String guess : previousGuesses) 
         {
         	if (index < t.length) 
-        	{  // Using local variable to avoid side effects on global state
+        	{  
+        		// Using local variable to avoid side effects on global state
                 updateGameState(guess, targetWord, t[index]);
                 index++;
             } 

@@ -49,9 +49,21 @@ public class Log
 	
 	public void clear()
 	{
+		clearFileContent(logFile);
 		logFile = null;
 		currentSession = null;
 		totalGames.clear();
+	}
+	
+	public void clearFileContent(File logFile) {
+	    try (FileWriter fw = new FileWriter(logFile, false)) 
+	    {
+	        // By not writing anything to the file, it effectively clears it.
+	    } 
+	    catch (IOException e) 
+	    {
+	        e.printStackTrace();
+	    }
 	}
 	
 	public boolean isEmpty()
@@ -59,6 +71,13 @@ public class Log
 		return totalGames.size() == 0;
 
 	}
+	
+	public void reset()
+	{
+		removeSession(getLastSession());
+		setCurrentSession(newSession());
+	}
+	
 	public File getLogFile()
 	{
 		return logFile;
@@ -106,12 +125,6 @@ public class Log
 	    }
 	}
 	
-	public void reset()
-	{
-		removeSession(getLastSession());
-		setCurrentSession(newSession());
-	}
-	
 	public GameSession newSession()
 	{
 		GameSession newSession = new GameSession(totalGames.size() + 1);
@@ -123,16 +136,13 @@ public class Log
 	public void logSession(int gameNum, boolean won, String guessWord, String targetWord)
 	{
 		// Use for update currentSession		
-	    if (currentSession.getPreviousGuesses() instanceof ArrayList) 
-	    {
-	        currentSession.getPreviousGuesses().add(guessWord);
-	    } 
-	    else 
-	    {
-	        List<String> newGuesses = new ArrayList<>(currentSession.getPreviousGuesses());
-	        newGuesses.add(guessWord);
-	        currentSession.setPreviousGuesses(newGuesses);
-	    }
+		List<String> newGuesses = new ArrayList<>(currentSession.getPreviousGuesses());
+        if (!newGuesses.contains(guessWord))
+        {
+        	newGuesses.add(guessWord);
+        }
+        currentSession.setWon(won);
+        currentSession.setPreviousGuesses(newGuesses);
 	    currentSession.setCurrentWord(new SelectWord(targetWord));
 	}
 	
@@ -141,7 +151,7 @@ public class Log
 		// Save games
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(f, true))) 
         {
-            writer.write(s.toString());
+            writer.write(s.toString() + "\n");
         } 
         catch (IOException e) 
         {
@@ -168,14 +178,22 @@ public class Log
 	            String targetWord = reader.readLine().trim(); // Target word
 	            List<String> previousGuesses = Arrays.asList(reader.readLine().trim().split(" "));  // Previous guesses
 	            
-	            GameSession session = new GameSession(gameNumber, won, new SelectWord(targetWord), previousGuesses);
-	            totalGames.add(session);
-	            System.out.println("Session: " + session);
+	            GameSession s = new GameSession(gameNumber, won, new SelectWord(targetWord), previousGuesses);
+	            totalGames.add(s);
+	            System.out.println("Session: " + s);
 	        }
+	        
+	        for (int i = 0; i < totalGames.size(); i++) {
+	            if (i < totalGames.size() - 1) {
+	                saveGame(totalGames.get(i), logFile);
+	            }
+	        }
+	        
 	        if (!totalGames.isEmpty() && getLastSession().isFinished()) 
 	        {
 	            currentSession = newSession(); 
-	        } else 
+	        }
+	        else
 	        {
 	            currentSession = getLastSession(); 
 	        }

@@ -88,6 +88,16 @@ public class GameController
 		System.out.println(newGame.getLog().getCurrentSession().getCurrentWord().getTargetWord()); // display target for testing
 	}
 	
+	public void reset()
+	{
+		initializingTable();
+		Log l = newGame.getLog();
+		l.setCurrentSession(l.newSession());
+		createGameController(table, new GameBoard(l, new ShadowData(table), new Stats()));
+		updateLabelsUI();
+		updateKeyboardUI();
+	}
+	
 	private void showAlertDialog(String message) {
 	    Alert alert = new Alert(AlertType.ERROR);
 	    alert.setTitle("Input Error");
@@ -127,6 +137,7 @@ public class GameController
 			{
 				newGame.saveGame();
 				showStatScreen();
+				reset();
 			}
 		}
 		else
@@ -184,14 +195,17 @@ public class GameController
     		
     		for (String s : newGame.getLog().getCurrentSession().getPreviousGuesses())
     		{
+    			System.out.print("Prev guesses: " + s + " ");
     			guessInput.setText(s);
     			checkGuess();
     		}
     	}
-    	else if (character.equals("HELP"))
+    	else if (character.equals("STATISTIC"))
     	{
     		// Pop a help menu
     		newGame.saveGame();
+    		showStatScreen();
+    		
     	}
     	else if (character.equals("RESET"))
         {

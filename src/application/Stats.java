@@ -15,7 +15,7 @@ public class Stats
 	
 	public Stats()
 	{
-		resetStats();
+		clear();
 	}
 	
 	public Stats(int n, float r, int cs, int ms, Map<Integer, Integer> hm)
@@ -27,7 +27,7 @@ public class Stats
 		this.setGuessesDistribution(hm);
 	}
 	
-	private void resetStats() {
+	public void clear() {
 		setGamesPlayed(0);
         setWinRate(0.0f);
         setCurrentStreak(0);
@@ -37,11 +37,6 @@ public class Stats
             guessesDistribution.put(i, 0);
         }
     }
-	
-	public void clear() 
-	{
-		resetStats();		
-	}
 
 	public int getGamesPlayed() 
 	{

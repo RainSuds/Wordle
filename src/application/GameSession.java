@@ -12,7 +12,7 @@ public class GameSession
     
     public GameSession()
     {
-    	this.gameNumber = 0;
+    	this.gameNumber = 1;
         this.won = false;
         this.currentWord = new SelectWord(); // Initialize with a new SelectWord
         this.previousGuesses = new ArrayList<String>();
@@ -74,6 +74,11 @@ public class GameSession
     	this.previousGuesses = l;
     }
     
+    public boolean guessInPreviousGuesses(String g)
+    {
+    	return previousGuesses.contains(g);
+    }
+    
     
     public boolean isFinished() 
     {
@@ -86,7 +91,6 @@ public class GameSession
     	{
     		return previousGuesses.size() == 6;
     	}
-		
     }
 
     @Override
