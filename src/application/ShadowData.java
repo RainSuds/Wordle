@@ -65,6 +65,13 @@ public class ShadowData
 		currentGameTable = null;
 	}
 	
+	public void clearUsedLetters()
+	{
+		if (usedLetters != null) {
+	        usedLetters.clear();
+	    }
+	}
+	
 	private void clearRowStyles(Label[] row) 
 	{
 	    for (Label label : row) 

@@ -56,6 +56,17 @@ public class GameController
 	private void initializeKeyboardButtons() 
 	{
         // Map for keys
+		if (keyboardButtons != null) {
+	        for (Button button : keyboardButtons.values()) {
+	            if (button != null) {
+	            	ColorStyle.LIGHTGREY.applyBackground(button);
+	                button.setDisable(false);
+	            }
+	        }
+	    }
+		
+		newGame.getShadowData().clearUsedLetters();
+		
 		keyboardButtons = Map.ofEntries(
 								        Map.entry('Q', Q), Map.entry('W', W), Map.entry('E', E), Map.entry('R', R), Map.entry('T', T), Map.entry('Y', Y), Map.entry('U', U), Map.entry('I', I), Map.entry('O', O), Map.entry('P', P),
 								        Map.entry('A', A), Map.entry('S', S), Map.entry('D', D), Map.entry('F', F), Map.entry('G', G), Map.entry('H', H), Map.entry('J', J), Map.entry('K', K), Map.entry('L', L),
