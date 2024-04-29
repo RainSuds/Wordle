@@ -180,7 +180,6 @@ public class Log
 	            
 	            GameSession s = new GameSession(gameNumber, won, new SelectWord(targetWord), previousGuesses);
 	            totalGames.add(s);
-	            System.out.println("Session: " + s);
 	        }
 	        
 	        for (int i = 0; i < totalGames.size(); i++) {

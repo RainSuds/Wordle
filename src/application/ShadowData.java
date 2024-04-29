@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class ShadowData 
@@ -172,38 +173,50 @@ public class ShadowData
 	
 	public void updateGameState(String guessWord, String targetWord, Label[] currentRow) 
 	{
-        Map<Character, Integer> letterFrequency = new HashMap<>();
-        
-        for (char c : targetWord.toCharArray()) 
-        {
-            letterFrequency.put(c, letterFrequency.getOrDefault(c, 0) + 1);
-        }
+	    Map<Character, Integer> letterFrequency = calculateLetterFrequency(targetWord);
+	    updateLabelsAndStyles(guessWord, targetWord, currentRow, letterFrequency);
+	    refreshLabels(currentRow);
+	}
 
-        for (int i = 0; i < targetWord.length(); i++) 
-        {
-            char letter = guessWord.charAt(i);
-            Label label = currentRow[i];
-            label.setText(String.valueOf(letter).toUpperCase());
+	private Map<Character, Integer> calculateLetterFrequency(String word) 
+	{
+	    Map<Character, Integer> frequency = new HashMap<>();
+	    for (char c : word.toCharArray()) {
+	        frequency.put(c, frequency.getOrDefault(c, 0) + 1);
+	    }
+	    return frequency;
+	}
 
-            if (letter == targetWord.charAt(i)) 
-            {
-                addUsedLetter(letter, ColorStyle.GREEN);
-                ColorStyle.GREEN.applyBackground(label);
-                letterFrequency.put(letter, letterFrequency.get(letter) - 1);
-            }
-            else if (letterFrequency.getOrDefault(letter, 0) > 0) 
-            {
-                addUsedLetter(letter, ColorStyle.YELLOW);
-                ColorStyle.YELLOW.applyBackground(label);
-                letterFrequency.put(letter, letterFrequency.get(letter) - 1);
-            } 
-            else 
-            {
-                ColorStyle.GREY.applyBackground(label);
-                addUsedLetter(letter, ColorStyle.GREY);
-            }
-        }
-        refreshLabels(currentRow);
-    }
-	
+	private void updateLabelsAndStyles(String guessWord, String targetWord, Label[] labels, Map<Character, Integer> frequency) 
+	{
+	    for (int i = 0; i < guessWord.length(); i++) 
+	    {
+	        char guess = guessWord.charAt(i);
+	        Label label = labels[i];
+	        label.setText(String.valueOf(guess).toUpperCase());
+
+	        applyStylesBasedOnGuess(guess, i, targetWord, frequency, label);
+	    }
+	}
+
+	private void applyStylesBasedOnGuess(char guess, int index, String targetWord, Map<Character, Integer> frequency, Label label) 
+	{
+	    if (guess == targetWord.charAt(index)) 
+	    {
+	        ColorStyle.GREEN.applyBackground(label);
+	        frequency.put(guess, frequency.get(guess) - 1);
+	        addUsedLetter(guess, ColorStyle.GREEN);
+	    } 
+	    else if (frequency.getOrDefault(guess, 0) > 0) 
+	    {
+	        ColorStyle.YELLOW.applyBackground(label);
+	        frequency.put(guess, frequency.get(guess) - 1);
+	        addUsedLetter(guess, ColorStyle.YELLOW);
+	    } 
+	    else 
+	    {
+	        ColorStyle.GREY.applyBackground(label);
+	        addUsedLetter(guess, ColorStyle.GREY);
+	    }
+	}
 }

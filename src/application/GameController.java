@@ -108,7 +108,7 @@ public class GameController
 	
 	public void addCharacterToGuess(String c)
 	{
-		if (guessInput.getText().length() < 5) 
+		if (guessInput.getText().length() < 5 && !keyboardButtons.get(c.charAt(0)).isDisabled()) 
 		{
             guessInput.appendText(c.toUpperCase());
             updateLabelsUI();
@@ -195,7 +195,6 @@ public class GameController
     		
     		for (String s : newGame.getLog().getCurrentSession().getPreviousGuesses())
     		{
-    			System.out.print("Prev guesses: " + s + " ");
     			guessInput.setText(s);
     			checkGuess();
     		}
@@ -274,17 +273,28 @@ public class GameController
 	
 	public void updateKeyboardUI() 
 	{
-        for (Map.Entry<Character, ColorStyle> entry : newGame.getShadowData().getUsedLetters().entrySet()) 
-        {
-            char key = entry.getKey();
-            ColorStyle style = entry.getValue();
-            Button button = keyboardButtons.get(key);
-            if (button != null) 
-            {
-                style.applyBackground(button); // Use the enum's method to apply the style
-            }
-        }
+		for (Map.Entry<Character, ColorStyle> entry : newGame.getShadowData().getUsedLetters().entrySet()) 
+		{
+	        char key = entry.getKey();
+	        ColorStyle style = entry.getValue();
+	        updateKeyboardButton(key, style); 
+	    }
     }
+	
+	private void updateKeyboardButton(char letter, ColorStyle style) 
+	{
+		// update and disabling buttons
+	    Button button = keyboardButtons.get(letter);
+	    if (button != null) 
+	    {
+	        style.applyBackground(button);
+	        if (style == ColorStyle.GREY) 
+	        {
+	            button.setDisable(true);
+	        }
+	    }
+	}
+
 	
 	
 	private void showStatScreen() {
